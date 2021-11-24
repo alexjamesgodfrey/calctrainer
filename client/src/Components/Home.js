@@ -10,7 +10,7 @@ export default function Home() {
                 <p style={{ zIndex: 10}}>
                     welcome to calctrainer.io
                 </p>
-                <Link tyle={{ zIndex: 10}} className="App-link" to="/problems">begin</Link>
+                <Link style={{ zIndex: 10}} className="App-link" to="/problems">begin</Link>
             </header>
         </div>              
     )

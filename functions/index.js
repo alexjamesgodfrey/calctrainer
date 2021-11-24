@@ -3,18 +3,14 @@ const functions = require("firebase-functions");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyParser = require('body-parser')
 const path = require("path");
-
-app.use(cors());
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+const bodyParser = require("body-parser");
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors());8
 app.use(express.static(path.join(__dirname, "..", "client", "build")));
 
-require('./routes/users.js')(app);
-require('./routes/surveyresponses.js')(app);
-require('./routes/flows.js')(app);
-require('./routes/notion.js')(app);
+require('./routes/problems.js')(app);
 
 app.get("/", async (req, res) => {
     try {
@@ -31,4 +27,4 @@ if (process.env.DEVELOPMENT === 'true') {
     });
 }
 
-exports.automatestudy = functions.https.onRequest(app)
+exports.calctrainer = functions.https.onRequest(app)
