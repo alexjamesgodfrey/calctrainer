@@ -5,12 +5,14 @@ import Header from './Header'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import 'katex/dist/katex.min.css';
+import Problem from './Problem'
 import { BlockMath } from 'react-katex';
 
 export default function Subsection() {
     const [reload, setReload] = useState(false)
     const [loading, setLoading] = useState(true)
     const [randoms, setRandoms] = useState([])
+    const [showAnswer, setShowAnswer] = useState(false)
     const target = useRef(null)
     const [showTip, setShowTip] = useState(false)
     const [originals, setOriginals] = useState([])
@@ -91,31 +93,7 @@ export default function Subsection() {
                 <h2 style={{ textAlign: 'center' }}>{section} -- {subsection} </h2>
                 {
                     problems.map((p, i) => {
-                        return (
-                            <div>
-                                {randoms[i] ? 
-                                    <OverlayTrigger
-                                        placement='right'
-                                        overlay={
-                                            <Tooltip>
-                                                This question randomly generates constants  
-                                            </Tooltip>
-                                        }
-                                    >
-                                    <div className="d-flex align-items-center">
-                                        <span onClick={() => setShowTip(!showTip)}>{i+1}. {p.question}</span>
-                                        <div style={{borderRadius: '50%', backgroundColor: '#84CACC', width: '8px', height: '8px', margin: '2px 0px 0px 4px'}}></div>
-                                    </div>
-                                    </OverlayTrigger>
-                                :
-                                    <span>{i+1}. {p.question}</span>
-                                }
-                                
-                                <div style={{ margin: '0px' }} className="d-flex justify-content-center align-items-center">
-                                    <BlockMath math={p.math} />
-                                </div>
-                            </div>
-                        )
+                        return <Problem showOverlay={randoms[i]} problem={p} />
                     })
                 }
             </div>

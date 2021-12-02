@@ -45,11 +45,13 @@ export default function Problems() {
         <div onClick={() => getProblems()}>
             <Header />
             <h2 style={{textAlign: 'center'}}>Problems</h2>
-            {
-                sections.map((s, i) => {
-                    return s
-                })
-            }
+            <div className="d-flex flex-wrap">
+                {
+                    sections.map((s, i) => {
+                        return s
+                    })
+                }
+            </div>
             <Toast show={showToast} onClose={() => setShowToast(false)} style={{position: 'absolute', bottom: '20px', right: '20px'}}>
             <Toast.Header>
                 <strong className="me-auto">calctrainer.io</strong>

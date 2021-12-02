@@ -7,7 +7,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors());8
+app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "client", "build")));
 
 require('./routes/problems.js')(app);
@@ -21,8 +22,8 @@ app.get("/", async (req, res) => {
 })
 
 if (process.env.DEVELOPMENT === 'true') {
-    app.listen(5000, () => {
-        console.log(`server has started on port ${5000}`);
+    app.listen(process.env.PORT, () => {
+        console.log(`server has started on port ${process.env.PORT}`);
         console.log('static file served at ' + path.join(__dirname, "..", "client", "build", "index.html"));
     });
 }

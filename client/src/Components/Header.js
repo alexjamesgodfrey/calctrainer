@@ -16,7 +16,7 @@ export default function Header() {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text style={{ color: 'black'}}>about</Navbar.Text>
+                    <Link to="/submit"><Navbar.Text style={{ color: 'black'}}>submit</Navbar.Text></Link>
                 </Navbar.Collapse>
             </Navbar>
         </div>

@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import _ from 'underscore'
-import Subsection from './Subsection'
+import arrowRight from '../images/arrowright.svg'
 
 export default function Section(props) {
     const [subsections, setSubsections] = useState([])
@@ -12,7 +12,10 @@ export default function Section(props) {
         for (const s in grouped){
             tempSections.push(
                 <Link to={`/subsection/?section=${grouped[s][0].section}&subsection=${s}`}>
-                    <p style={{lineHeight: 0.8}}>{s}</p>
+                    <div style={{ cursor: 'pointer'}} className="d-flex align-items-center">
+                        <span style={{ marginTop: '2px' }}>{s}</span>
+                        <img style={{ height: '20px', width: '20px', margin: '4px 0px 0px 10px' }} src={arrowRight} alt="arrow right" />
+                    </div>
                 </Link>
             )
         }
@@ -24,7 +27,7 @@ export default function Section(props) {
     }, [])
 
     return (
-        <div style={{ margin: '0px 20px'}}>
+        <div style={{ margin: '20px'}}>
             <h3>{props.problems[0].section}</h3>
             <div style={{ margin: '0px 20px'}}>
                 {
