@@ -10,7 +10,7 @@ export default function Header() {
         <div style={{ borderBottom: '2px solid black', marginBottom: '10px' }}>
             <Navbar style={{ margin: '0px 20px'}}>
                     <Navbar.Brand>
-                    <Link to="/problems">
+                    <Link to="/user/problems">
                         <div className="d-flex flex-column">
                             <strong style={{lineHeight: 1, marginTop: '3px'}}>calctrainer</strong>
                             <strong style={{fontSize: '17px', textAlign: 'right', lineHeight: 0.75}}>beta</strong>
@@ -20,7 +20,7 @@ export default function Header() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     {currentUser ? 
-                        <Link to="/account">
+                        <Link to="/user/account">
                             <Navbar.Text 
                                 style={{ color: 'black', margin: '0px 10px', cursor: 'pointer'}}
                             >
@@ -28,7 +28,7 @@ export default function Header() {
                             </Navbar.Text>
                         </Link>
                     :
-                        <Link to="/login">
+                        <Link to="/user/login">
                             <Navbar.Text 
                                 style={{ color: 'black', margin: '0px 10px', cursor: 'pointer'}}
                             >
@@ -36,7 +36,7 @@ export default function Header() {
                             </Navbar.Text>
                         </Link>
                 }
-                    <Link to="/submit">
+                    <Link to="/user/submit">
                         <Navbar.Text 
                             style={{ color: 'black'}}
                         >

@@ -14,13 +14,14 @@ function App() {
     <Router>
       <AuthProvider>
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/problems' element={<Problems/>} />
-        <Route path="/subsection" element={<Subsection />} />
-        <Route path="/submit" element={<Submit/>} />
+        <Route path="/" element={<Login/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/account" element={<PrivateRoute/>}>
-          <Route path="/account" element={<Account/>}/>
+        <Route path="/user" element={<PrivateRoute/>}>
+          <Route path="/user/account" element={<Account/>}/>
+          <Route path='/user/home' element={<Home/>} />
+          <Route path='/user/problems' element={<Problems/>} />
+          <Route path="/user/subsection" element={<Subsection />} />
+          <Route path="/user/submit" element={<Submit/>} />
         </Route>
       </Routes>
       </AuthProvider>

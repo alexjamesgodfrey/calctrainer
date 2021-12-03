@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useAuth } from '../Contexts/AuthContext'
 import { useLocation } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import Header from './Header'
@@ -9,17 +10,43 @@ import Problem from './Problem'
 import { BlockMath } from 'react-katex';
 
 export default function Subsection() {
+    const { currentUser } = useAuth()
     const [reload, setReload] = useState(false)
     const [loading, setLoading] = useState(true)
     const [randoms, setRandoms] = useState([])
-    const [showAnswer, setShowAnswer] = useState(false)
-    const target = useRef(null)
-    const [showTip, setShowTip] = useState(false)
-    const [originals, setOriginals] = useState([])
     const [problems, setProblems] = useState([])
+    const [levels, setLevels] = useState([])
+
     const search = useLocation().search
     const section = new URLSearchParams(search).get('section');
     const subsection = new URLSearchParams(search).get('subsection');
+
+    const getLevels = async () => {
+        await fetch(`/api/levels/${currentUser.uid}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setLevels(data)
+            })
+    }
+
+    const getLevel = (pid) => {
+        for (let i=0; i<levels.length; i++) {
+            if (levels[i].problemid === pid){
+                return parseInt(levels[i].level)
+            }
+        }
+        return 0
+    }
+
+    const getLevelOrigin = (pid) => {
+        for (let i=0; i<levels.length; i++) {
+            if (levels[i].problemid === pid){
+                return true
+            }
+        }
+        return false
+    }
 
     const getSubProblems = async () => {
         console.log('fdasf')
@@ -69,6 +96,7 @@ export default function Subsection() {
 
     useEffect(() => {
         getSubProblems()
+        getLevels()
     }, [])
 
     if (loading) {
@@ -89,11 +117,11 @@ export default function Subsection() {
     return (
         <div>
             <Header />
-            <div className="d-flex flex-column align-items-center">
+            <div style={{ overflow: 'scroll'}} className="d-flex flex-column align-items-center">
                 <h2 style={{ textAlign: 'center' }}>{section} -- {subsection} </h2>
                 {
                     problems.map((p, i) => {
-                        return <Problem showOverlay={randoms[i]} problem={p} />
+                        return <Problem levelFromDatabase={getLevelOrigin(p.id)} level={getLevel(p.id)} showOverlay={randoms[i]} problem={p} />
                     })
                 }
             </div>
